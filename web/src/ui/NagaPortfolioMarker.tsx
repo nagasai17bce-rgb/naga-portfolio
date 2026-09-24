@@ -1,0 +1,1 @@
+export default function NagaPortfolioMarker(){return <div aria-label="Naga Sai">Naga Sai · AI Engineer</div>}

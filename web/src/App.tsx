@@ -50,7 +50,7 @@ export default function App() {
         </div></div>
         <div className="scroll-cue"><span className="scroll-cue-label">SCROLL</span><span className="scroll-cue-track"><span className="scroll-cue-dot" /></span></div>
       </section>
-      <Resume lang="en" />
+      <Resume />
       <Works lang="en" innerRef={worksRef} />
     </main>
   </>

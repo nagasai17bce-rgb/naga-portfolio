@@ -17,9 +17,9 @@ main{position:relative;z-index:20}.hero{min-height:100vh;padding:120px 7vw;displ
 @media(max-width:900px){nav{display:none}.stage{width:100vw;height:75vh;opacity:.45}.avatar{transform:translateX(-50%) scale(.72)}.hero{padding:110px 24px 70px;align-items:flex-end}.hero-copy{max-width:95%}.hero p{font-size:15px}.section{padding:100px 24px;min-height:120vh}.content{width:100%;margin:0}.grid2{grid-template-columns:1fr}.footer{padding:24px;display:block}.footer div+div{margin-top:8px}.readout{display:none}}
 </style>
 <style>
-#stage{position:fixed;z-index:5;inset:70px 0 0 0;left:0;top:70px;width:100vw;height:calc(100vh - 70px);transform:none;pointer-events:none;overflow:hidden}
+#stage{position:fixed;z-index:15;inset:70px 0 0 0;left:0;top:70px;width:100vw;height:calc(100vh - 70px);transform:none;pointer-events:none;overflow:hidden}
 #avatarCanvas{position:absolute;inset:0;width:100%;height:100%;display:block}
-.sceneGlow{position:absolute;left:50%;top:52%;width:min(42vw,620px);height:min(42vw,620px);transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,#2867ff18 0%,#19d8ff0d 35%,transparent 70%);filter:blur(10px);pointer-events:none}
+.sceneGlow{position:absolute;z-index:-1;left:50%;top:52%;width:min(42vw,620px);height:min(42vw,620px);transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,#2867ff18 0%,#19d8ff0d 35%,transparent 70%);filter:blur(10px);pointer-events:none}
 .scrolllabel{position:absolute;left:50%;bottom:4%;transform:translateX(-50%);font-size:10px;letter-spacing:.22em;color:#6c7d97;white-space:nowrap;text-transform:uppercase}
 @media(max-width:900px){#stage{inset:62px 0 0 0;left:0;top:62px;width:100vw;height:calc(100vh - 62px);transform:none;opacity:.95}.scrolllabel{bottom:2%;font-size:8px}.sceneGlow{width:95vw;height:95vw}}
 </style></head>
@@ -64,7 +64,8 @@ const canvas=document.getElementById('avatarCanvas');
 const stage=document.getElementById('stage');
 const scene=new THREE.Scene();
 const camera=new THREE.PerspectiveCamera(28,1,.1,100);
-camera.position.set(0,2.9,9.6);
+camera.position.set(0,1.35,10.8);
+camera.lookAt(0,1.15,0);
 
 const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
 renderer.setPixelRatio(Math.min(devicePixelRatio,2));
@@ -78,7 +79,7 @@ const rim=new THREE.DirectionalLight(0x4da6ff,4); rim.position.set(-5,5,-5); sce
 const violet=new THREE.PointLight(0x8b6cff,12,14); violet.position.set(3,2,-2); scene.add(violet);
 
 const avatar=new THREE.Group();
-avatar.position.y=-2.65;
+avatar.position.y=-3.05;
 scene.add(avatar);
 
 const mat=(color,rough=.55,metal=0)=>new THREE.MeshStandardMaterial({color,roughness:rough,metalness:metal});
@@ -113,21 +114,23 @@ function patch(text,pos,scale,accent='#51e7ff',rot=0){
   p.position.set(...pos);p.rotation.y=rot;p.scale.set(scale,scale,scale);g.add(p);return g;
 }
 
-// legs
+// legs — rounded anatomical proportions
 for(const side of [-1,1]){
-  const leg=new THREE.Group();leg.position.x=side*.53;
-  const thigh=capsule(.34,.9,pants);thigh.position.y=1.55;leg.add(thigh);
-  const knee=sphere(.34,pants);knee.position.y=1.02;leg.add(knee);
-  const shin=capsule(.29,.95,pants);shin.position.y=.48;leg.add(shin);
-  const boot=box(.58,.25,.95,shoe);boot.position.set(0,-.14,.18);leg.add(boot);
-  if(side<0) leg.add(patch('BITS GOA',[-.01,1.72,.34],.52,'#d9b56a'));
-  else leg.add(patch('VOICE AI',[.01,.72,.31],.5,'#9b7cff'));
+  const leg=new THREE.Group();leg.position.x=side*.48;
+  const thigh=capsule(.31,1.05,pants);thigh.position.y=1.58;leg.add(thigh);
+  const knee=sphere(.30,pants);knee.position.y=1.02;leg.add(knee);
+  const calf=capsule(.25,.92,pants);calf.position.y=.48;leg.add(calf);
+  const ankle=cyl(.20,.22,.22,pants);ankle.position.y=.0;leg.add(ankle);
+  const foot=new THREE.Mesh(new THREE.SphereGeometry(.34,24,16),shoe);foot.scale.set(1.35,.55,1.75);foot.position.set(0,-.16,.22);leg.add(foot);
+  if(side<0) leg.add(patch('BITS GOA',[-.02,1.72,.34],.50,'#d9b56a'));
+  else leg.add(patch('VOICE AI',[.02,.72,.30],.48,'#9b7cff'));
   avatar.add(leg);
 }
 
 // torso + jacket
 const torso=new THREE.Group();torso.position.y=2.72;
-const chest=capsule(.86,1.18,jacket);chest.scale.set(1.05,.96,.58);torso.add(chest);
+const chest=capsule(.86,1.18,jacket);chest.scale.set(1.14,1.04,.66);torso.add(chest);
+const waist=box(1.18,.42,.72,jacket);waist.position.y=-.62;torso.add(waist);
 const shirtFront=box(.72,.72,.12,shirt);shirtFront.position.set(0,.12,.59);torso.add(shirtFront);
 const collarL=box(.22,.55,.16,shirt);collarL.position.set(-.22,.45,.62);collarL.rotation.z=-.5;torso.add(collarL);
 const collarR=collarL.clone();collarR.position.x=.22;collarR.rotation.z=.5;torso.add(collarR);
@@ -136,16 +139,18 @@ torso.add(patch('RAG',[.43,.05,.62],.44,'#9b7cff'));
 torso.add(patch('MCP',[0,-.34,.62],.42,'#51e7ff'));
 avatar.add(torso);
 
-// arms, hands, shoulder pads
+// arms — shoulders, biceps, elbows, forearms and visible hands
 for(const side of [-1,1]){
-  const arm=new THREE.Group();arm.position.set(side*1.03,3.05,0);
-  const shoulder=sphere(.4,jacket);shoulder.scale.set(1,.9,.9);arm.add(shoulder);
-  const upper=capsule(.29,.68,jacket);upper.position.y=-.48;upper.rotation.z=side*.10;arm.add(upper);
-  const elbow=sphere(.29,jacket);elbow.position.y=-.93;arm.add(elbow);
-  const fore=capsule(.25,.65,jacket);fore.position.y=-1.34;fore.rotation.z=-side*.07;arm.add(fore);
-  const hand=sphere(.25,skin);hand.position.y=-1.78;arm.add(hand);
-  if(side<0) arm.add(patch('TEKION',[-.02,-.55,.30],.42,'#44f2e5'));
-  else {arm.add(patch('WALMART',[.02,-.20,.31],.39,'#ffd15b'));arm.add(patch('DATABRICKS',[.02,-.75,.29],.34,'#ff6b77'))}
+  const arm=new THREE.Group();arm.position.set(side*1.02,3.05,0);
+  const shoulder=sphere(.38,jacket);shoulder.scale.set(1.12,.92,.95);arm.add(shoulder);
+  const upper=capsule(.27,.82,jacket);upper.position.y=-.48;upper.rotation.z=side*.08;arm.add(upper);
+  const elbow=sphere(.265,jacket);elbow.position.y=-.98;arm.add(elbow);
+  const fore=capsule(.235,.78,jacket);fore.position.y=-1.42;fore.rotation.z=-side*.05;arm.add(fore);
+  const wrist=cyl(.17,.18,.16,skin);wrist.position.y=-1.86;arm.add(wrist);
+  const hand=sphere(.235,skin);hand.position.y=-2.03;hand.scale.set(.78,1.15,.72);arm.add(hand);
+  for(let f=0;f<4;f++){const finger=capsule(.045,.13,skin,8);finger.position.set((f-1.5)*.055,-2.20,.02);arm.add(finger);}
+  if(side<0) arm.add(patch('TEKION',[-.02,-.58,.30],.40,'#44f2e5'));
+  else {arm.add(patch('WALMART',[.02,-.25,.30],.38,'#ffd15b'));arm.add(patch('DATABRICKS',[.02,-.82,.28],.33,'#ff6b77'))}
   avatar.add(arm);
 }
 

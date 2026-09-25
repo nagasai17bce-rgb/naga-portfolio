@@ -17,11 +17,11 @@ main{position:relative;z-index:20}.hero{min-height:100vh;padding:120px 7vw;displ
 @media(max-width:900px){nav{display:none}.stage{width:100vw;height:75vh;opacity:.45}.avatar{transform:translateX(-50%) scale(.72)}.hero{padding:110px 24px 70px;align-items:flex-end}.hero-copy{max-width:95%}.hero p{font-size:15px}.section{padding:100px 24px;min-height:120vh}.content{width:100%;margin:0}.grid2{grid-template-columns:1fr}.footer{padding:24px;display:block}.footer div+div{margin-top:8px}.readout{display:none}}
 </style>
 <style>
-#stage{position:fixed;z-index:5;inset:70px 0 0 0;pointer-events:none;overflow:hidden}
+#stage{position:fixed;z-index:5;inset:70px 0 0 0;left:0;top:70px;width:100vw;height:calc(100vh - 70px);transform:none;pointer-events:none;overflow:hidden}
 #avatarCanvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 .sceneGlow{position:absolute;left:50%;top:52%;width:min(42vw,620px);height:min(42vw,620px);transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,#2867ff18 0%,#19d8ff0d 35%,transparent 70%);filter:blur(10px);pointer-events:none}
 .scrolllabel{position:absolute;left:50%;bottom:4%;transform:translateX(-50%);font-size:10px;letter-spacing:.22em;color:#6c7d97;white-space:nowrap;text-transform:uppercase}
-@media(max-width:900px){#stage{inset:62px 0 0 0;opacity:.95}.scrolllabel{bottom:2%;font-size:8px}.sceneGlow{width:95vw;height:95vw}}
+@media(max-width:900px){#stage{inset:62px 0 0 0;left:0;top:62px;width:100vw;height:calc(100vh - 62px);transform:none;opacity:.95}.scrolllabel{bottom:2%;font-size:8px}.sceneGlow{width:95vw;height:95vw}}
 </style></head>
 <body>
 <div class="progress" id="progress"></div>

@@ -22,6 +22,23 @@ main{position:relative;z-index:20}.hero{min-height:100vh;padding:120px 7vw;displ
 .sceneGlow{position:absolute;z-index:-1;left:50%;top:52%;width:min(42vw,620px);height:min(42vw,620px);transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,#2867ff18 0%,#19d8ff0d 35%,transparent 70%);filter:blur(10px);pointer-events:none}
 .scrolllabel{position:absolute;left:50%;bottom:4%;transform:translateX(-50%);font-size:10px;letter-spacing:.22em;color:#6c7d97;white-space:nowrap;text-transform:uppercase}
 @media(max-width:900px){#stage{inset:62px 0 0 0;left:0;top:62px;width:100vw;height:calc(100vh - 62px);transform:none;opacity:.95}.scrolllabel{bottom:2%;font-size:8px}.sceneGlow{width:95vw;height:95vw}}
+
+/* GTM proof demo */
+.proof-panel{margin:22px 0 28px;padding:20px;border:1px solid #3976bb77;border-radius:20px;background:linear-gradient(145deg,#0d1d35f2,#070e1bef);box-shadow:0 20px 55px #0005}
+.proof-top{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+.proof-kicker{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan)}
+.proof-status{font-size:10px;color:#a9e9c4;border:1px solid #58d69a55;border-radius:99px;padding:5px 8px}
+.proof-actions{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.proof-btn{cursor:pointer;border:1px solid #36577e;background:#10213a;color:#e8f3ff;border-radius:10px;padding:9px 11px;font:700 12px inherit}
+.proof-btn.active,.proof-btn:hover{background:#174a83;border-color:#59c4ff}
+.proof-output{min-height:116px;padding:15px;border:1px solid #ffffff12;border-radius:13px;background:#030a15}
+.proof-output h4{margin:0 0 8px;font-size:15px}.proof-output p{margin:0;color:#a9b8cd;font-size:13px;line-height:1.65}
+.proof-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.proof-metric{padding:12px;border-radius:12px;background:#ffffff07;border:1px solid #ffffff12}
+.proof-metric strong{display:block;font-size:23px;letter-spacing:-.04em}.proof-metric span{display:block;color:#8497b4;font-size:10px;margin-top:4px}
+.proof-note{font-size:11px!important;color:#7185a3!important;margin-top:12px!important}
+@media(max-width:600px){.proof-metrics{grid-template-columns:1fr 1fr}.proof-panel{padding:14px}}
+
 </style></head>
 <body>
 <div class="progress" id="progress"></div>
@@ -49,7 +66,19 @@ main{position:relative;z-index:20}.hero{min-height:100vh;padding:120px 7vw;displ
 <div class="card"><h3>Membership Reconciliation</h3><p class="meta">Databricks, Cosmos DB, Key Vault and RBAC cloud reconciliation workflows.</p><div class="tags"><span class="tag">Databricks</span><span class="tag">Cosmos DB</span><span class="tag">Azure</span></div></div>
 <div class="card"><h3>Enterprise RAG Platform</h3><p class="meta">Embeddings, vector search, MCP and enterprise knowledge retrieval.</p><div class="tags"><span class="tag">RAG</span><span class="tag">Embeddings</span><span class="tag">Vector Search</span></div></div>
 </div></div></section>
-<section class="section" id="wellness"><div class="content"><div class="num">04 / AI-POWERED GO-TO-MARKET</div><h2>Grow a<br>wellness business.</h2><p class="copy">A proposed AI growth toolkit for a nutrition and fitness business like RS Fit Couple. Focused on acquiring new customers, marketing consistently, and retaining existing clients—not just tracking appointments.</p><div class="cards">
+<section class="section" id="wellness"><div class="content"><div class="num">04 / AI-POWERED GO-TO-MARKET</div><h2>Grow a<br>wellness business.</h2><p class="copy">A proposed AI growth toolkit for a nutrition and fitness business like RS Fit Couple. Focused on acquiring new customers, marketing consistently, and retaining existing clients—not just tracking appointments.</p>
+<div class="proof-panel" id="gtm-proof">
+  <div class="proof-top"><div><div class="proof-kicker">Interactive product demo</div><h3 style="margin:7px 0 0;font-size:23px">From content to customer</h3></div><span class="proof-status">LIVE SIMULATION · SAMPLE DATA</span></div>
+  <p class="meta" style="line-height:1.6;margin:10px 0 0">Click through a realistic growth workflow. This is a working front-end prototype with illustrative data—not Shankar's actual analytics or a claim of results.</p>
+  <div class="proof-actions" role="group" aria-label="Choose demo workflow">
+    <button class="proof-btn active" type="button" data-proof="campaign">1. Create campaign</button>
+    <button class="proof-btn" type="button" data-proof="followup">2. Convert lead</button>
+    <button class="proof-btn" type="button" data-proof="metrics">3. Measure funnel</button>
+  </div>
+  <div class="proof-output" id="proof-output" aria-live="polite"><h4>7-day local wellness campaign</h4><p><strong>Reel hook:</strong> “Busy schedule? Start with one sustainable habit.”<br><strong>CTA:</strong> Message “START” to enquire about coaching.<br><strong>Next action:</strong> Publish the Reel, track incoming enquiries, and compare results with the next creative.</p></div>
+  <div class="proof-metrics"><div class="proof-metric"><strong>24</strong><span>Sample enquiries</span></div><div class="proof-metric"><strong>8</strong><span>Sample consultations</span></div><div class="proof-metric"><strong>3</strong><span>Sample sign-ups</span></div></div>
+  <p class="proof-note">All numbers are fictional demo inputs: 24 enquiries → 8 consultations → 3 sign-ups. Real impact would be measured in a pilot against a baseline.</p>
+</div><div class="cards">
 <div class="card"><h3>01 · Local customer acquisition</h3><p class="meta">Create campaign ideas for nearby audiences, landing-page copy, referral offers and enquiry forms to turn local interest into consultation leads.</p><div class="tags"><span class="tag">Lead generation</span><span class="tag">Local GTM</span><span class="tag">Landing pages</span></div></div>
 <div class="card"><h3>02 · AI marketing studio</h3><p class="meta">Generate a weekly calendar of Instagram Reels, posts, captions, Tamil/English creatives and campaign variants aligned to the coach's services and brand voice.</p><div class="tags"><span class="tag">Content marketing</span><span class="tag">Tamil + English</span><span class="tag">Campaigns</span></div></div>
 <div class="card"><h3>03 · Enquiry-to-customer follow-up</h3><p class="meta">Organise incoming leads by source and stage, flag enquiries that need a response, and draft personalised follow-up messages for approval.</p><div class="tags"><span class="tag">Lead nurturing</span><span class="tag">CRM workflow</span><span class="tag">Human approval</span></div></div>
@@ -222,5 +251,18 @@ avatar.rotation.x=0.015;
   ring.rotation.z=t*.08;
   renderer.render(scene,camera);
 }
+
 animate();
+// Interactive GTM proof simulator: all content and metrics are illustrative.
+const proofOutputs={
+ campaign:{title:"7-day local wellness campaign",body:"<strong>Reel hook:</strong> “Busy schedule? Start with one sustainable habit.”<br><strong>CTA:</strong> Message “START” to enquire about coaching.<br><strong>Next action:</strong> Publish the Reel, track incoming enquiries, and compare results with the next creative."},
+ followup:{title:"Lead follow-up draft · for coach approval",body:"<strong>Sample enquiry:</strong> Priya · Interested in online coaching · Source: Instagram.<br><strong>Draft:</strong> “Hi Priya, thanks for reaching out! Are you looking for online or in-person coaching? I can share how our coaching process works and help you decide whether it fits your goals.”<br><strong>Next action:</strong> Coach reviews and sends; update the lead stage only after a real response."},
+ metrics:{title:"Illustrative conversion funnel",body:"<strong>24 enquiries → 8 consultations → 3 sign-ups.</strong><br>Enquiry-to-consultation: 33.3% · Consultation-to-sign-up: 37.5% · Overall enquiry-to-sign-up: 12.5%.<br><strong>Next action:</strong> Compare real weekly results by campaign source and improve the weakest stage."}
+};
+const proofOut=document.getElementById("proof-output");
+document.querySelectorAll("[data-proof]").forEach(btn=>btn.addEventListener("click",()=>{
+ document.querySelectorAll("[data-proof]").forEach(b=>b.classList.toggle("active",b===btn));
+ const item=proofOutputs[btn.dataset.proof];
+ proofOut.innerHTML="<h4>"+item.title+"</h4><p>"+item.body+"</p>";
+}));
 </script></body></html>
